@@ -132,7 +132,7 @@ class Count_Days {
 		# Counts to $startYear, and executes "smart loop" which is a partially
 		# optimized look-up table adder. Optimized for CPU time, not RAM
 		
-		$curYearFirstDay = 0;
+		$curYearFirstDay = $this->first_day;
 		$targetsHit = 0;
 		for( $thisYear = $startYear; $thisYear < $endYear; $thisYear++ ) {
 			
@@ -164,13 +164,16 @@ if( isset( $_GET[ 'start_year' ] ) ) {
 if( isset( $_GET[ 'end_year' ] ) ) {
 	$endYear = $_GET[ 'end_year' ];
 }
-
 $mycal = new Count_Days($start_year, $target);
 $mycal->smartTable = $mycal->populateSmartTable();
 
 if( isset( $_GET[ 'target' ] ) ) {
 	$mycal->target = $mycal->getTargetID( $_GET[ 'target' ] );
 	$target = $mycal->target;
+}
+if( isset( $_GET[ 'first_day' ] ) ) {
+	$firstDay = $mycal->getTargetID( $_GET[ 'first_day' ] );
+	$mycal->first_day = $firstDay;
 }
 
 
